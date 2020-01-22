@@ -35,4 +35,7 @@
   .content{
     padding: 40px
   }
+  .title{
+    margin-bottom: 40px
+  }
 </style>
