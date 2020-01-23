@@ -34,7 +34,7 @@
 						password: this.password
 					}
 				)
-        console.log(response)
+        this.$store.commit('token/setToken', response.data.data.token)
         this.username = this.password = null
       }
     }
