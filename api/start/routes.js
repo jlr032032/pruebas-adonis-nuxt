@@ -20,4 +20,5 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
+Route.post('/api/login', 'LoginController.login')
 Route.post('/api/signup', 'SignupController.signup')
