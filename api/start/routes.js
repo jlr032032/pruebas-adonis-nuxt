@@ -21,3 +21,4 @@ Route.get('/', () => {
 })
 
 Route.post('/api/login', 'LoginController.login')
+Route.post('/api/signup', 'SignupController.signup')
