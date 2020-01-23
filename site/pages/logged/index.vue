@@ -1,5 +1,5 @@
 <template>
-  <h2>Bienvenido, esta ruta solo es accesible por usuarios con sesión activa</h2>
+  <h2>{{message}}</h2>
 </template>
 
 <script>
@@ -7,14 +7,31 @@
   export default {
     data(){
       return {
-        message: "Debes tener sesión activa para esta ruta"
+        message: "Ruta restringida"
       }
     },
     async mounted(){
-      const response = await axios.post(
-				'http://127.0.0.1:3333/api/logged',
-      )
-      console.log(response)
+      console.log('Enviando el token: ', this.$store.state.token.token)
+      try {
+        const response = await axios({
+          method: 'post',
+          url: 'http://127.0.0.1:3333/api/logged',
+          data: {},
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token.token}`
+          }
+        })
+        this.message = "Bienvenido"
+      } catch (error) {
+        const status = error.response.data.error.status
+        switch(error.response.data.error.status){
+          case 401:
+            this.message = 'No autorizado para acceder a esta ruta'
+            break
+          default:
+            this.message = 'No es posible atender la solicitud en este momento. Por favor inténtelo de nuevo'
+        }
+      }
     }
   }
 </script>
