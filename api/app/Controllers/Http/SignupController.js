@@ -1,8 +1,24 @@
 'use strict'
 
+const User = use('App/Models/User')
+
 class SignupController {
-  signup({request}){
-    return request.post()
+  async signup({request, response}){
+    const userData = request.post()
+    try {
+      const user = await User.create(userData)
+      return {
+        status: 'success',
+        data: user
+      }
+    } catch (error) {
+      console.log(error)
+      return response.status(500).json({
+        status: 'error',
+        message: 'La petición no puede ser procesada en este momento, intente más tarde'
+      })
+    }
+
   }
 }
 
