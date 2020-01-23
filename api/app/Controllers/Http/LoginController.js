@@ -24,6 +24,10 @@ class LoginController {
     return request.post()
   }
 
+  loginRedis({request}){
+    return request.post()
+  }
+
 }
 
 module.exports = LoginController
