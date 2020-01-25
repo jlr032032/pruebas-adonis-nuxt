@@ -1,6 +1,6 @@
 'use strict'
 
-const User = use('App/Models/User')
+const redis = use('Redis')
 
 class LoginController {
 
@@ -24,8 +24,21 @@ class LoginController {
     return request.post()
   }
 
-  loginRedis({request}){
-    return request.post()
+  async loginRedis({request, response}){
+    const redis = use('Redis')
+    try {
+      const token = String(Date.now())
+      const userData = JSON.stringify({})
+      const result = await redis.set(token, userData)
+      console.log(result)
+      return { token }
+    } catch (error) {
+      console.log(error)
+      return response.status(500).json({
+        status: 'error',
+        message: 'Su petición no puede procesarse en este momento, inténtelo más tarde'
+      })
+    }
   }
 
 }
