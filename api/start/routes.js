@@ -23,4 +23,5 @@ Route.get('/', () => {
 Route.post('/api/login', 'LoginController.login')
 Route.post('/api/signup', 'SignupController.signup')
 Route.post('/api/logged', 'LoggedController.index').middleware(['auth'])
-Route.get('/api/configurable-flow/:flowId', 'Business.configurableFlow')
+Route.post('/api/configurable-flow', 'BusinessController.configurableFlow')
+
