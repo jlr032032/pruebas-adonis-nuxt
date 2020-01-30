@@ -21,5 +21,6 @@ Route.get('/', () => {
 })
 
 Route.post('/api/login/inbuilt', 'LoginController.inbuiltLogin')
+Route.post('/api/login/redis', 'LoginController.redisLogin')
 Route.post('/api/signup', 'SignupController.signup')
 Route.post('/api/logged', 'LoggedController.index').middleware(['auth'])

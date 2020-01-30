@@ -24,6 +24,15 @@ class LoginController {
     return request.post()
   }
 
+  redisLogin({request}){
+    try {
+      return request.post()
+    } catch (error) {
+      console.log(error)
+      return { status: 'error' }
+    }
+  }
+
 }
 
 module.exports = LoginController
