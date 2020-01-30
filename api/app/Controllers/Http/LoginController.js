@@ -4,7 +4,7 @@ const User = use('App/Models/User')
 
 class LoginController {
 
-  async login({request, auth, response}){
+  async inbuiltLogin({request, auth, response}){
     try {
       const token = await auth.attempt(
         request.input('username'),
