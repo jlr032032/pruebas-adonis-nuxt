@@ -27,12 +27,16 @@
     methods: {
       async login(event){
         event.preventDefault()
+        const data = btoa(JSON.stringify(
+          {
+            username: this.username,
+            password: this.password
+          }
+        ))
+        console.log(data)
         const response = await axios.post(
 					'http://127.0.0.1:3333/api/login/redis',
-					{
-						username: this.username,
-						password: this.password
-					}
+					{ data }
         )
         console.log(response)
         //this.$store.commit('token/setToken', response.data.data.token)
