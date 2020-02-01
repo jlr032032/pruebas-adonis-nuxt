@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="title">Login incorporado en AdonisJs</h2>
+    <h2 class="title">Login personalizado con Redis</h2>
     <form>
       <div>
         <label>Usuario</label>
@@ -27,20 +27,34 @@
     methods: {
       async login(event){
         event.preventDefault()
-        const data = btoa(JSON.stringify(
-          {
-            username: this.username,
-            password: this.password
-          }
-        ))
-        console.log(data)
-        const response = await axios.post(
-					'http://127.0.0.1:3333/api/login/redis',
-					{ data }
-        )
-        console.log(response)
-        //this.$store.commit('token/setToken', response.data.data.token)
-        this.username = this.password = null
+        let data = {
+          username: this.username,
+          password: this.password,
+          other: 'value'
+        }
+        console.log('\n\nData sin cifrar:', data)
+        try{
+          const response = await this.request('http://127.0.0.1:3333/api/login/redis', 'post', data)
+          console.log(response)
+          //this.$store.commit('token/setToken', response.data.data.token)
+        }catch(error){
+          console.log(error)
+        }finally{
+          this.username = this.password = null
+        }
+      },
+      encrypt(data){
+        return btoa(JSON.stringify(data))
+      },
+      async request(url, method, data){
+        const _data = this.encrypt(data)
+        console.log('Data cifrada:', _data)
+        const response = await axios({
+          method,
+          url,
+          data: { data: this.encrypt(data) }
+        })
+        return response
       }
     }
   }
