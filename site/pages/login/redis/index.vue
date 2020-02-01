@@ -20,8 +20,8 @@
   export default {
     data(){
       return {
-        username: null,
-        password: null
+        username: '',
+        password: ''
       }
     },
     methods: {
@@ -40,7 +40,7 @@
         }catch(error){
           console.log(error)
         }finally{
-          this.username = this.password = null
+          this.username = this.password = ''
         }
       },
       encrypt(data){
