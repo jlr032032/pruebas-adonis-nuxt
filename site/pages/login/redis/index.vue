@@ -10,6 +10,10 @@
         <label>Contraseña</label>
         <input type="password" v-model="password">
       </div>
+      <div>
+        <input type="checkbox" v-model="unexpectedData">
+        <label>Enviar campo adicional no esperado por el API</label>
+      </div>
       <input type="submit" @click="login">
     </form>
   </div>
@@ -21,7 +25,8 @@
     data(){
       return {
         username: '',
-        password: ''
+        password: '',
+        unexpectedData: false
       }
     },
     methods: {
@@ -30,8 +35,9 @@
         let data = {
           username: this.username,
           password: this.password,
-          other: 'value'
         }
+        if(this.unexpectedData)
+          data.unexpectedData = 'Dato no esperado por el API'
         console.log('\n\nData sin cifrar:', data)
         try{
           const response = await this.request('http://127.0.0.1:3333/api/login/redis', 'post', data)
@@ -41,6 +47,7 @@
           console.log(error)
         }finally{
           this.username = this.password = ''
+          this.unexpectedData = false
         }
       },
       encrypt(data){
