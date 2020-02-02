@@ -4,6 +4,10 @@ const User = use('App/Models/User')
 
 class LoginController {
 
+  constructor(){
+    logger.info('Controller initialized: Login')
+  }
+
   async inbuiltLogin({request, auth, response}){
     try {
       const token = await auth.attempt(
@@ -15,7 +19,7 @@ class LoginController {
         data: token
       })
     } catch (error) {
-      console.log(error)
+      logger.error(error)
       response.status(500).json({
         status: 'error',
         message: 'Combinación incorrecta de usuario y contraseña'

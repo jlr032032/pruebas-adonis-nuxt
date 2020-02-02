@@ -12,7 +12,7 @@ class SignupController {
         data: user
       }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
       return response.status(500).json({
         status: 'error',
         message: 'La petición no puede ser procesada en este momento, intente más tarde'

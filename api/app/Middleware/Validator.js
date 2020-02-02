@@ -3,23 +3,26 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const Logger = use('Logger')
 const Joi = require('@hapi/joi')
 
 class Validator {
+
+  constructor(){
+    logger.info('Middleware initialized: Validator')
+  }
+
   /**
    * @param {object} ctx
    * @param {data} ctx.data
    * @param {Function} next
    */
   async handle ({ data, response }, next) {
-    Logger.debug('Validator middleware')
     try {
       const internValidator = new InternValidator()
       internValidator.validate(data)
       await next()
     } catch (error) {
-      Logger.error('Los datos de la petición contienen valores inválidos: %s', error.details[0].message)
+      logger.warning(`Los datos de la petición contienen valores inválidos: ${error.details[0].message}`)
       return response
         .status(400)
         .json({status: 'error'})
@@ -49,6 +52,7 @@ class InternValidator {
 
   validate(data){
     Joi.attempt(data, this.schema, this.config)
+    logger.debug('validate function - Request values are valid')
   }
 
 }
