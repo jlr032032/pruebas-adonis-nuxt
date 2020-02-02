@@ -1,6 +1,6 @@
 'use strict'
 
-const User = use('App/Models/User')
+const Joi = require('@hapi/joi')
 
 class LoginController {
 
@@ -28,10 +28,30 @@ class LoginController {
     return request.post()
   }
 
-  redisLogin({data}){
-    return data
+  async redisLogin({data, response}){
+    const structure = Joi.object({
+      username: Joi.required(),
+      password: Joi.required()
+    })
+    const valid = validateStructure('redisLogin', structure, data, response)
+    if(valid)
+      return data
   }
 
 }
 
 module.exports = LoginController
+
+function validateStructure(caller, structure, data, response){
+  try {
+    Joi.attempt(data, structure)
+    logger.debug(`${caller} function - Request structure is valid`)
+    return true
+  } catch (error) {
+    logger.warning(`${caller} - Request structure is not valid: ${error.details[0].message}`)
+    response.status(400).json({
+      status: 'error'
+    })
+    return false
+  }
+}
