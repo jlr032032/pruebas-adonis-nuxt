@@ -40,3 +40,5 @@ class CustomLogger {
 }
 
 global.logger = new CustomLogger()
+
+logger.info('Helper loaded: CustomLogger')

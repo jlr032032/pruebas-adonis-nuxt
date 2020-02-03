@@ -20,9 +20,10 @@ class Validator {
     try {
       const internValidator = new InternValidator()
       internValidator.validate(data)
+      logger.debug('Request data values are valid')
       await next()
     } catch (error) {
-      logger.warning(`Los datos de la petición contienen valores inválidos: ${error.details[0].message}`)
+      logger.warning(`Request data values are invalid: ${error.details[0].message}`)
       return response
         .status(400)
         .json({status: 'error'})
@@ -52,7 +53,6 @@ class InternValidator {
 
   validate(data){
     Joi.attempt(data, this.schema, this.config)
-    logger.debug('validate function - Request values are valid')
   }
 
 }

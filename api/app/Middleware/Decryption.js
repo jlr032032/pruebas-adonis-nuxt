@@ -19,6 +19,7 @@ class Decryption {
       if(ctx.request.hasBody()){
         const encrypted = ctx.request.post().data
         ctx.data = decrypt(encrypted)
+        logger.debug(`Decrypted data: ${JSON.stringify(ctx.data)}`)
       }
       await next()
     } catch (error) {
@@ -34,7 +35,6 @@ module.exports = Decryption
 
 function decrypt(encrypted){
   let decrypted = Buffer.from(encrypted, 'base64').toString()
-  logger.debug(`decrypt function - Decrypted data: ${decrypted}`)
   decrypted = JSON.parse(decrypted)
   return decrypted
 }
