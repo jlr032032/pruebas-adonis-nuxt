@@ -14,17 +14,17 @@ class Decryption {
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle(ctx, next) {
+  async handle({request, response}, next) {
     try {
-      if(ctx.request.hasBody()){
-        const encrypted = ctx.request.post().data
-        ctx.data = decrypt(encrypted)
-        logger.debug(`Decrypted data: ${JSON.stringify(ctx.data)}`)
+      if(request.hasBody()){
+        const encrypted = request.post().data
+        request.data = decrypt(encrypted)
+        logger.debug(`Decrypted data: ${JSON.stringify(request.data)}`)
       }
       await next()
     } catch (error) {
-      log.error(error)
-      return ctx.response.status(500).json({
+      logger.warning(`Request data is in a format that couldn't be decrypted. Received: `, resquest.post())
+      return response.status(400).json({
         status: 'error'
       })
     }

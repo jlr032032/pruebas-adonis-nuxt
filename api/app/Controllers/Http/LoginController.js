@@ -1,6 +1,7 @@
 'use strict'
 
 const Joi = require('@hapi/joi')
+const model = use('App/Models/Login.js')
 
 class LoginController {
 
@@ -28,14 +29,24 @@ class LoginController {
     return request.post()
   }
 
-  async redisLogin({data, response}){
+  async redisLogin({request, response}){
     const structure = Joi.object({
       username: Joi.required(),
       password: Joi.required()
     })
-    const valid = validateStructure(structure, data, response)
-    if(valid)
-      return data
+    try{
+      validateStructure(structure, request.data, response)
+      const user = model.checkCredentials(request.data, response)
+      model.checkBlockedUser(user, response)
+      logger.notice('Successful login')
+      responseBody = {
+        status: 'success',
+        message: 'Successfuly logged in'
+      }
+      response.status(200).json(responseBody)
+    }catch(error){
+      response.status(response.data.httpStatus).json(response.data.body)
+    }
   }
 
 }
@@ -45,13 +56,16 @@ module.exports = LoginController
 function validateStructure(structure, data, response){
   try {
     Joi.attempt(data, structure)
-    logger.debug(`Request structure is valid`)
-    return true
+    logger.debug('Request structure is valid')
   } catch (error) {
-    logger.warning(`Request structure is not valid: ${error.details[0].message}`)
-    response.status(400).json({
-      status: 'error'
-    })
-    return false
+    logger.notice(`Request structure is not valid: ${error.details[0].message}`)
+    response.data = {
+      httpStatus: 400,
+      body: {
+        status: 'error',
+        message: 'Invalid request structure'
+      }
+    }
+    throw new Error('RequestStructureError')
   }
 }

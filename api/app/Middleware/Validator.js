@@ -16,10 +16,10 @@ class Validator {
    * @param {data} ctx.data
    * @param {Function} next
    */
-  async handle ({ data, response }, next) {
+  async handle ({ request, response }, next) {
     try {
       const internValidator = new InternValidator()
-      internValidator.validate(data)
+      internValidator.validate(request.data)
       logger.debug('Request data values are valid')
       await next()
     } catch (error) {
