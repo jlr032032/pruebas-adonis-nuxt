@@ -11,7 +11,7 @@ let mixins = {
         url
       }
       if(data!==undefined && data!==null)
-        config.data= encrypt(data)
+        config.data= { data: encrypt(data) }
       const response = await axios(config)
       return response
     }
