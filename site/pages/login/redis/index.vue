@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import axios from 'Axios'
+  import request from '~/plugins/request.js'
   export default {
     data(){
       return {
@@ -29,6 +29,9 @@
         unexpectedData: false
       }
     },
+    mixins: [
+      request
+    ],
     methods: {
       async login(event){
         event.preventDefault()
@@ -49,19 +52,6 @@
           this.username = this.password = ''
           this.unexpectedData = false
         }
-      },
-      encrypt(data){
-        return btoa(JSON.stringify(data))
-      },
-      async request(url, method, data){
-        const _data = this.encrypt(data)
-        console.log('Data cifrada:', _data)
-        const response = await axios({
-          method,
-          url,
-          data: { data: this.encrypt(data) }
-        })
-        return response
       }
     }
   }
