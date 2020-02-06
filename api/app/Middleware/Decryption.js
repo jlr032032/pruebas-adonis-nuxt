@@ -23,7 +23,7 @@ class Decryption {
       }
       await next()
     } catch (error) {
-      logger.warning(`Request data is in a format that couldn't be decrypted. Received: `, resquest.post())
+      logger.warning(`Request data is in a format that couldn't be decrypted`)
       return response.status(400).json({
         status: 'error'
       })
