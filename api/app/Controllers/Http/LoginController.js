@@ -39,7 +39,7 @@ class LoginController {
       const user = model.checkCredentials(request.data, response)
       model.checkBlockedUser(user, response)
       logger.notice('Successful login')
-      responseBody = {
+      const responseBody = {
         status: 'success',
         message: 'Successfuly logged in'
       }
