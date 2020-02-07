@@ -1,6 +1,5 @@
 'use strict'
 
-import encrypt from './encrypt.js'
 import axios from 'Axios'
 
 let mixins = {
@@ -11,7 +10,7 @@ let mixins = {
         url
       }
       if(data!==undefined && data!==null)
-        config.data= { data: encrypt(data) }
+        config.data= { data: btoa(JSON.stringify(data)) }
       const response = await axios(config)
       return response
     }
