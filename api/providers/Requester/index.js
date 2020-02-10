@@ -10,7 +10,7 @@ class Requester {
 
   async get(url){
     try {
-      return await this._request(url, 'get')
+      return await this._request(url, 'GET')
     } catch (error) {
       throw error
     }
@@ -18,7 +18,7 @@ class Requester {
 
   async post(url, data){
     try {
-      return await this._request(url, 'post', data)
+      return await this._request(url, 'POST', data)
     } catch (error) {
       throw error
     }
@@ -27,7 +27,7 @@ class Requester {
 
   async put(url, data){
     try {
-      return await this._request(url, 'put', data)
+      return await this._request(url, 'PUT', data)
     } catch (error) {
       throw error
     }
@@ -35,7 +35,7 @@ class Requester {
 
   async delete(url, data){
     try {
-      return await this._request(url, 'delete', data)
+      return await this._request(url, 'DELETE', data)
     } catch (error) {
       throw error
     }
