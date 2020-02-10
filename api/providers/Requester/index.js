@@ -3,6 +3,7 @@
 class Requester {
 
   constructor(Encrypter, Axios){
+    logger.info('Initializing provider: Requester')
     this.Encrypter = Encrypter
     this.Axios = Axios
   }
@@ -45,8 +46,9 @@ class Requester {
     try {
       if (data!==undefined && data!==null)
         config.data = this.Encrypter.encrypt(data)
-      const {status, data} = await this.Axios(config)
-      return this._resObj(status, data)
+      logger.debug(`Sending ${method} request to ${url}`)
+      const response = await this.Axios(config)
+      return this._resObj(response.status, response.data)
     } catch (error) {
       if (error.response)
         return this._resObj(error.response.status, error.response.data)
@@ -67,5 +69,3 @@ class Requester {
 }
 
 module.exports = Requester
-
-
