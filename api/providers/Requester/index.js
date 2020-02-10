@@ -22,7 +22,6 @@ class Requester {
     } catch (error) {
       throw error
     }
-
   }
 
   async put(url, data){
