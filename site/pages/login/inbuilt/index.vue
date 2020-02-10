@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="title">Login con aplicación universal</h2>
+    <h2 class="title">Login incorporado en AdonisJs</h2>
     <form>
       <div>
         <label>Usuario</label>
@@ -28,7 +28,7 @@
       async login(event){
         event.preventDefault()
         const response = await axios.post(
-					'http://127.0.0.1:3333/api/login',
+					'http://127.0.0.1:3333/api/login/inbuilt',
 					{
 						username: this.username,
 						password: this.password

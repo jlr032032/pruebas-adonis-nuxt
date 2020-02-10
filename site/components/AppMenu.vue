@@ -5,6 +5,7 @@
     <nuxt-link to="/signup" tag="li">Registro de usuario</nuxt-link>
     <nuxt-link to="/logged" tag="li">Ruta restringida</nuxt-link>
     <nuxt-link to="/encryption" tag="li">Cifrado</nuxt-link>
+    <nuxt-link to="/requester" tag="li">Requester</nuxt-link>
   </nav>
 </template>
 

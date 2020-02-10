@@ -20,7 +20,9 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
 
-Route.post('/api/login', 'LoginController.login')
+Route.post('/api/login/inbuilt', 'LoginController.inbuiltLogin')
+Route.post('/api/login/redis', 'LoginController.redisLogin').middleware(['decryption','validator'])
+Route.get('/api/login/requester', 'RequesterController.index')
 Route.post('/api/signup', 'SignupController.signup')
 Route.post('/api/logged', 'LoggedController.index').middleware(['auth'])
 Route.post('/api/encrypt', 'SecurityController.encrypt')

@@ -1,7 +1,5 @@
 'use strict'
 
-const path = require('path')
-
 /*
 |--------------------------------------------------------------------------
 | Providers
@@ -14,12 +12,7 @@ const path = require('path')
 */
 const providers = [
   '@adonisjs/framework/providers/AppProvider',
-  '@adonisjs/auth/providers/AuthProvider',
-  '@adonisjs/bodyparser/providers/BodyParserProvider',
-  '@adonisjs/cors/providers/CorsProvider',
-  '@adonisjs/lucid/providers/LucidProvider',
-  path.join(__dirname, '..', 'providers', 'Encrypter/Provider'),
-  path.join(__dirname, '..', 'providers', 'Requester/Provider')
+  '@adonisjs/bodyparser/providers/BodyParserProvider'
 ]
 
 /*
@@ -32,7 +25,6 @@ const providers = [
 |
 */
 const aceProviders = [
-  '@adonisjs/lucid/providers/MigrationsProvider'
 ]
 
 /*
