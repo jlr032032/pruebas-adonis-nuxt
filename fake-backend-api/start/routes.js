@@ -16,4 +16,5 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => { return { message: 'This is the fake backend api' } } )
+Route.get('/backend-api/response', 'ResponseSimulatorController.index')
+Route.post('/backend-api/login', 'BackendLoginController.login').middleware(['decryption'])
