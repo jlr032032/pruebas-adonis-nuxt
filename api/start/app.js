@@ -18,6 +18,7 @@ const providers = [
   '@adonisjs/bodyparser/providers/BodyParserProvider',
   '@adonisjs/cors/providers/CorsProvider',
   '@adonisjs/lucid/providers/LucidProvider',
+  '@adonisjs/antl/providers/AntlProvider',
   path.join(__dirname, '..', 'providers', 'Encrypter/Provider'),
   path.join(__dirname, '..', 'providers', 'Requester/Provider')
 ]
