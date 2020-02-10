@@ -17,4 +17,8 @@
 const Route = use('Route')
 
 Route.get('/backend-api/response', 'ResponseSimulatorController.index')
+<<<<<<< HEAD
 
+=======
+Route.post('/backend-api/login', 'BackendLoginController.login').middleware(['decryption'])
+>>>>>>> b4385c3df3d37133b66cf6dde4597fcfc99989e7
