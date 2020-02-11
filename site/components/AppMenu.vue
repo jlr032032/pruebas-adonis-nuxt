@@ -7,6 +7,7 @@
     <nuxt-link to="/encryption" tag="li">Cifrado</nuxt-link>
     <nuxt-link to="/requester" tag="li">Requester</nuxt-link>
     <nuxt-link to="/multilanguage" tag="li">Multilenguaje</nuxt-link>
+    <nuxt-link to="/exceptions" tag="li">Excepciones de Adonis</nuxt-link>
   </nav>
 </template>
 
