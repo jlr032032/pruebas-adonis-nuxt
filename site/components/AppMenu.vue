@@ -6,6 +6,7 @@
     <nuxt-link to="/logged" tag="li">Ruta restringida</nuxt-link>
     <nuxt-link to="/encryption" tag="li">Cifrado</nuxt-link>
     <nuxt-link to="/requester" tag="li">Requester</nuxt-link>
+    <nuxt-link to="/multilanguage" tag="li">Multilenguaje</nuxt-link>
   </nav>
 </template>
 
