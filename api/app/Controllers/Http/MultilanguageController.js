@@ -6,7 +6,10 @@ class MultilanguageController {
     try {
       const { language } = request.get()
       antl.switchLocale(language)
-      response.json({message: antl.formatMessage('vocabulary.HELLO_WORLD')})
+      response.json({
+        helloWorldMsg: antl.formatMessage('vocabulary.HELLO_WORLD'),
+        generalMsg: antl.formatMessage('vocabulary.GENERAL_MSG')
+      })
     } catch (error) {
       console.log(error)
     }

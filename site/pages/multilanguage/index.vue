@@ -5,27 +5,28 @@
       <div>
         <label>Recibir mensaje en</label>
         <select v-model="language">
-          <option value="es">es</option>
           <option value="ec-01">ec-01</option>
+          <option value="ve-01">ve-01</option>
         </select>
       </div>
       <input type="submit" @click="sendRequest">
     </form>
-    <div class="result-container">
-      <label>Resultado:</label>
-      <input class="result-value" disabled v-model="result">
+    <div class="result-container" v-for="(key, value) of messages" :key="key">
+      <label>{{key}}</label>
+      <input class="result-value" disabled :value="value">
     </div>
   </div>
 </template>
 
 <style scoped>
   .result-container{
-    margin-top: 50px;
+    margin-top: 20px
   }
   .result-value{
+    margin: 0;
     border: none;
     background-color: transparent;
-    width: 100%;
+    width: 100%
   }
 </style>
 
@@ -34,8 +35,8 @@
   export default {
     data(){
       return {
-        language: 'es',
-        result: null
+        language: 've-01',
+        messages: {}
       }
     },
     methods: {
@@ -45,8 +46,8 @@
           const response = await axios.get(
             `http://127.0.0.1:3333/api/multilanguage?language=${this.language}`
           )
-          console.log(response.data)
-          this.result = response.data.message
+          this.messages = response.data
+          console.log(response)
         } catch (error) {
           console.log(error)
         }
